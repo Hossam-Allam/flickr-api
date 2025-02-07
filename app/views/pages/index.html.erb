@@ -13,7 +13,7 @@
 
 <% if @photos.present? %>
   <h2>Photos for User ID: <%= params[:user_id] %></h2>
-  <div class="photos">
+  <div class="photos" style="display: flex; flex-wrap: wrap; gap: 5px;">
     <% @photos.each do |photo| %>
       <%# Constructing the URL for each photo using Flickr's URL scheme %>
       <% image_url = "https://farm#{photo.farm}.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}_m.jpg" %>
