@@ -1,0 +1,6 @@
+<h1>Welcome to bad flickr</h1>
+<%= form_with(url: "/search", method: "get") do %>
+    <%= label_tag(:id, "Fkickr ID:") %>
+    <%= text_field_tag(:id) %>
+    <%= submit_tag("Search") %>
+<% end %>
