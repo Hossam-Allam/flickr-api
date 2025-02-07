@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
   def index
+    Rails.logger.debug "Flickr API Key: #{ENV['FLICKR_API_KEY']}"
+
     if params[:user_id].present?
       flickr = Flickr.new(
-        api_key: ENV["FLICKR_API_KEY"],
-        shared_secret: ENV["FLICKR_SHARED_SECRET"]
+        ENV["FLICKR_API_KEY"],
+        ENV["FLICKR_SHARED_SECRET"]
       )
 
       @photos = flickr.photos.search(user_id: params[:user_id])

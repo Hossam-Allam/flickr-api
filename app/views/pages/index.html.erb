@@ -1,6 +1,25 @@
 <h1>Welcome to bad flickr</h1>
-<%= form_with(url: "/search", method: "get") do %>
-    <%= label_tag(:id, "Fkickr ID:") %>
-    <%= text_field_tag(:id) %>
-    <%= submit_tag("Search") %>
+
+<%= form_with url: root_path, method: :get, local: true do |form| %>
+  <div>
+    <%= form.label :user_id, "Enter Flickr User ID:" %>
+    <%= form.text_field :user_id, value: params[:user_id] %>
+  </div>
+  <div>
+    <%= form.submit "Show Photos" %>
+  </div>
+<% end %>
+
+
+<% if @photos.present? %>
+  <h2>Photos for User ID: <%= params[:user_id] %></h2>
+  <div class="photos">
+    <% @photos.each do |photo| %>
+      <%# Constructing the URL for each photo using Flickr's URL scheme %>
+      <% image_url = "https://farm#{photo.farm}.staticflickr.com/#{photo.server}/#{photo.id}_#{photo.secret}_m.jpg" %>
+      <div class="photo">
+        <%= image_tag image_url, alt: photo.title %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
